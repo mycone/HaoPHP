@@ -7,6 +7,6 @@
  * @since 1.0
  */
 
-class view {
+class View {
 	
 }

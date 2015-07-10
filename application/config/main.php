@@ -8,13 +8,12 @@
  */
 
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'HaoPHP',
 	'theme'=>'default',
 	'timeZone'=>'Asia/Shanghai',
 	'import'=>array(
-		'application.models.*',
-		'application.controllers.*',
+		'models.*',
+		'controllers.*',
 	),
 	'db' => require(dirname(__FILE__).DIRECTORY_SEPARATOR.'db.php'),
 	'routes' => require(dirname(__FILE__).DIRECTORY_SEPARATOR.'routes.php'),
