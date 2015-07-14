@@ -13,7 +13,17 @@ class HomeController extends Controller {
 	 * @see Controller::get()
 	 */
 	public function get($params=NULL) {
-		echo "hello world! request method is get";
+		//use template engine
+		$this->display('index.html',array(
+			'title' => 'HaoPHP 1.0',
+			'array' => array(
+				'1' => "First array item",
+				'2' => "Second array item",
+				'n' => "N-th array item",
+			),
+			'j' => 5,
+		));
+		//echo "hello world! request method is get";
 	}
 	/**
 	 * $_POST请求

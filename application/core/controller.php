@@ -8,6 +8,7 @@
  */
 
 abstract class Controller {
+	protected $layout="public/layout.html";
 	public function __construct(){
 		$this->init();
 		Hook::add("before_handler", function ($params=NULL){
@@ -24,4 +25,24 @@ abstract class Controller {
 	protected function after_handler($params){}
 	abstract function get($params=NULL);
 	abstract function post($params=NULL);
+	
+	protected function model($model) {
+		$model = ucfirst($model);
+		return new $model();
+	}
+	
+	protected function display($template=NULL,$params=array()) {
+		$viewDir = APP_PATH.DS.'views'.DS;
+		$viewFile = $viewDir.strtolower(substr(get_class($this),0,-10)).DS.$template;
+		try {
+			$view = new View($viewFile,$viewDir.$this->layout);
+			foreach ($params as $k=>$v) {
+				$view->$k = $v;
+			}
+			return $view->render();
+		}
+		catch (Exception $e) {
+			exit($e->getMessage());
+		}
+	}
 }
