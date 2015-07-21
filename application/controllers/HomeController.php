@@ -14,8 +14,8 @@ class HomeController extends Controller {
 	 */
 	public function get($params=NULL) {
 		//use mode
-		$user = User::model()->findAll();
-		print_r($user);
+		//$user = User::model()->findAll();
+		//print_r($user);
 		
 		//use template engine
 		$this->display('index.html',array(

@@ -35,7 +35,7 @@ AUTO_INCREMENT=1;
 
 class User extends Model {
 	//表名必须定义，若设置有表前缀且此处加{}则使用表前缀，否则不使用表前缀
-	protected $_table = "{user}";
+	protected $_table = "user";
 	//主键必须定义
 	protected $_pkey = "id";
 	
