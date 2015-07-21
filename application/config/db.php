@@ -9,8 +9,12 @@
 
 return array(
 	'connectionString' => 'mysql:host=127.0.0.1;dbname=HaoPHP',
-	'username' => '~username~',
-	'password' => '~password~',
-	'charset'  => '~charset~',
-	'tablePrefix' => '~tablePrefix~'
+	//'username' => '~username~',
+	'username' => 'root',
+	//'password' => '~password~',
+	'password' => '',
+	//'charset'  => '~charset~',
+	'charset'  => 'utf8',
+	//'tablePrefix' => '~tablePrefix~'
+	'tablePrefix' => 'hp_'
 );
