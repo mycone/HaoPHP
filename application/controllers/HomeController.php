@@ -13,6 +13,10 @@ class HomeController extends Controller {
 	 * @see Controller::get()
 	 */
 	public function get($params=NULL) {
+		//use mode
+		$user = User::model()->findAll();
+		print_r($user);
+		
 		//use template engine
 		$this->display('index.html',array(
 			'title' => 'HaoPHP 1.0',
@@ -22,6 +26,8 @@ class HomeController extends Controller {
 				'n' => "N-th array item",
 			),
 			'j' => 5,
+			//print user table record
+			//'user' => $user,
 		));
 		//echo "hello world! request method is get";
 	}

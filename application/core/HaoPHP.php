@@ -31,23 +31,26 @@ class HaoPHP
 {
 	private static $importMap=array();
 	private static $classMap=array();
-	private static $routeMap=array();
 	private static $_instance;
 	private static $_coreClasses=array(
 		'Controller' => '/core/controller.php',
 		'Model' => '/core/model.php',
 		'View' => '/core/view.php',
 	);
+	private static $_config=array();
 	private function __clone() {}
 	private function __construct($config=NULL) {
 		if(is_string($config))
 			$config=require($config);
-		if (isset($config['import'])) 
-			self::$importMap = $config['import'];
-		if(isset($config['routes'])) 
-			self::$routeMap = $config['routes'];
 		if(isset($config['timeZone']))
 			date_default_timezone_set($config['timeZone']);
+		if (isset($config['import']))
+			self::$importMap = $config['import'];
+		self::$_config = $config;
+	}
+	
+	public static function config($key=NULL) {
+		return $key!==NULL ? self::$_config[$key] : self::$_config;
 	}
 	
 	public static function getInstance($config=NULL){
@@ -58,7 +61,27 @@ class HaoPHP
 	}
 	
 	public function run() {
-		return self::serve(self::$routeMap);
+		return self::serve(self::config('routes'));
+	}
+	
+	public static function import($classNameArray,$classDir="libraries") {
+		if(!is_array($classNameArray)) {
+			$classNameArray = explode(' ',trim($classNameArray,' '));
+		}
+		foreach ($classNameArray as $className) {
+			if(empty($className)) continue;
+			$classFile = APP_PATH.DS.$classDir.DS.str_replace(array('.','#'), array(DS,'.'), $className).'.php';
+			if(FALSE!==strpos($className,'.')) {
+				$classNameSplit = explode('.', $className);
+				$className = end($classNameSplit);
+			}
+			if(FALSE!==($pos = strpos($className,'#'))) {
+				$className = substr($className, 0, $pos);
+			}
+			if(!in_array($className, self::$classMap)) {
+				self::$classMap[$className] = $classFile;
+			}
+		}
 	}
 	
 	public static function autoload($className,$classMapOnly=false)
@@ -211,17 +234,9 @@ Hook::add("404", function(){
 	header('HTTP/1.1 404 Not Found');
 	header("status: 404 Not Found");
 	include(APP_PATH.'/views/system/404_page.php');
+	exit;
 });
 //请求结束
 Hook::add("after_request", function($params){
 	
 });
-
-
-
-
-
-
-
-
-

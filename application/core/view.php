@@ -59,7 +59,8 @@ class View {
 				'{/comment}' => '*/ ?>',
 				'{/*}' => '<?php /*',
 				'{*/}' => '*/ ?>',
-				);
+				'{baseurl}' => '<?php echo rtrim(BASE_URL,"/"); ?>',
+			);
 			
 			foreach ($keys as $key => $val) {
 				$patterns[] = '#' . str_replace('%%', '(.+)',
