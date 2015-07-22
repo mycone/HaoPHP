@@ -45,4 +45,12 @@ abstract class Controller {
 			exit($e->getMessage());
 		}
 	}
+	
+	protected function redirect($url,$http_code="302") {
+		if(!preg_match('/^https?:\/\//i', $url)) {
+			$url = BASE_URL.ltrim($url,'/');
+		}
+		header("Location: ".$url, TRUE, $http_code);
+		exit;
+	}
 }

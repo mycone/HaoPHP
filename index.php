@@ -9,7 +9,7 @@
 
 header("content-Type: text/html; charset=utf-8");
 define('DS', DIRECTORY_SEPARATOR);
-define('SYSTEM_PATH',str_replace(array('\\', '\\\\'), '/', dirname(__FILE__)));
+define('SYSTEM_PATH',str_replace(array('\\', '\\\\'), DS, dirname(__FILE__)));
 define('APP_PATH', SYSTEM_PATH.DS.'application');
 //载入配置
 $config = require(APP_PATH.DS.'config/main.php');

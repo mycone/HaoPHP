@@ -14,6 +14,26 @@
 define('HaoPHP_VERSION', '1.0');
 
 /**
+ * HaoPHP DS
+ * @var string
+ */
+defined('DS') OR define('DS', DIRECTORY_SEPARATOR);
+
+/**
+ * HaoPHP SYSTEM_PATH define
+ * @var string
+ */
+defined('SYSTEM_PATH') OR define('SYSTEM_PATH', str_replace(
+	array('\\', '\\\\'), DS ,realpath(dirname(__FILE__).'/../../'))
+);
+
+/**
+ * HaoPHP APP_PATH define
+ * @var string
+ */
+defined('APP_PATH') OR define('APP_PATH', SYSTEM_PATH.DS.'application');
+
+/**
  * HaoPHP baseUrl
  * @var string
  */
@@ -62,6 +82,10 @@ class HaoPHP
 	
 	public function run() {
 		return self::serve(self::config('routes'));
+	}
+	
+	public static function version() {
+		return 'HaoPHP v'.HaoPHP_VERSION;
 	}
 	
 	public static function import($classNameArray,$classDir="libraries") {

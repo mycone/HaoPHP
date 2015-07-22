@@ -17,6 +17,9 @@ class HomeController extends Controller {
 		//$user = User::model()->findAll();
 		//print_r($user);
 		
+		//$user = $this->model('user')->findAll();
+		//print_r($user);
+		
 		//use template engine
 		$this->display('index.html',array(
 			'title' => 'HaoPHP 1.0',
